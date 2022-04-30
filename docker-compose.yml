@@ -1,0 +1,38 @@
+###############################################################################
+#                          Generated on dockerenv.io                          #
+###############################################################################
+version: "3.1"
+
+services:
+  comments-demo-mysql-eight:
+    container_name: "cd-mysql-eight"
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - comments_demo_mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=vgwsyncsrvRpass
+      - MYSQL_DATABASE=vgwsyncsrvstorage
+      - MYSQL_USER=vgwsyncsrvsuer
+      - MYSQL_PASSWORD=vgwsyncsrvpass
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - "3306:3306"
+
+  comments-demo-php-fpm:
+    container_name: "cd-php-fpm"
+    build:
+      context: .
+    volumes:
+      - ./app:/var/www/html
+
+  comments-demo-nginx:
+    container_name: "cd-nginx"
+    image: nginx:alpine
+    volumes:
+      - ./dockerenv/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+     - "80:80"
+
+volumes:
+  comments_demo_mysql:

@@ -1,0 +1,17 @@
+{
+    "description": "Comment system",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "valeriy Khomenko"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
