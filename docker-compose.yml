@@ -1,23 +1,22 @@
 ###############################################################################
 #                          Generated on dockerenv.io                          #
 ###############################################################################
-version: "3.1"
-
+version: "3.4"
 services:
-  comments-demo-mysql-eight:
-    container_name: "cd-mysql-eight"
-    image: mysql:8
+  cmts-demo-mysql:
+    container_name: "cmts-demo-mysql"
+    image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - comments_demo_mysql:/var/lib/mysql
+      - cmts_demo_storage_mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=vgwsyncsrvRpass
-      - MYSQL_DATABASE=vgwsyncsrvstorage
-      - MYSQL_USER=vgwsyncsrvsuer
-      - MYSQL_PASSWORD=vgwsyncsrvpass
+      - MYSQL_ROOT_PASSWORD=rootPass
+      - MYSQL_DATABASE=comdata
+      - MYSQL_USER=comuser
+      - MYSQL_PASSWORD=compass
       - MYSQL_ROOT_HOST=%
     ports:
-      - "3306:3306"
+      - "1007:3306"
 
   comments-demo-php-fpm:
     container_name: "cd-php-fpm"
@@ -36,4 +35,4 @@ services:
      - "80:80"
 
 volumes:
-  comments_demo_mysql:
+  cmts_demo_storage_mysql:
