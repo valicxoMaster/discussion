@@ -4,6 +4,7 @@ namespace App;
 
 use Dotenv\Dotenv;
 use App\Exception\RouteException;
+use App\Model\Http\HttpRequst;
 
 /**
  * Class of an Application
@@ -54,7 +55,8 @@ class Application {
         
         return [
             "controller" => empty($controller)? "" : $controller,
-            "action" => empty($action)? "" : $action,            
+            "action" => empty($action)? "" : $action,
+            "param" => $routeParts[3]
         ];
     }
     
@@ -88,7 +90,17 @@ class Application {
             );
         }
         
-        $instance->$action();
+        $request = new HttpRequst();
+        $request->setRoute([
+            'route' => $route,
+            'path' => [
+                'class' => $class,
+                'file' => $file,
+                'action' => $action
+            ]
+        ]);
+        
+        $instance->$action($request);
     }
 
     /**
