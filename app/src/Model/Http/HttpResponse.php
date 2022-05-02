@@ -75,8 +75,15 @@ class HttpResponse
      * @return HttpResponse
      */
     public function setData($mixedObjectOrArray) : HttpResponse 
-    {
+    {        
         $this->mixedObjectOrArray = $mixedObjectOrArray;
+        
+        if (is_string($this->mixedObjectOrArray)) {
+            
+            $this->mixedObjectOrArray = new stdClass();
+            $this->mixedObjectOrArray->message = $mixedObjectOrArray;
+        }
+        
         return $this; 
     }   
     

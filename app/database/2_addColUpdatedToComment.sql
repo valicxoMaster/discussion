@@ -1,0 +1,1 @@
+ALTER TABLE `comments` ADD COLUMN `updated` DATETIME NOT NULL AFTER `enabled`;

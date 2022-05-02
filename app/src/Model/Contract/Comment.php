@@ -2,20 +2,24 @@
 
 namespace App\Model\Contract;
 
-use stdClass;
-
 /**
  * Class presents an instance of a comment
  *
  * @author Valeriy Khomenko
  */
-class Comment 
+class Comment extends AbstractContract
 {
     /**
      * @var string|null
      */
     protected $id = null;
-            
+    
+    /**
+     * 
+     * @var int
+     */
+    protected $articleId = 0;
+
     /**
      * 
      * @var string
@@ -30,48 +34,82 @@ class Comment
 
     /**
      * 
-     * @var string
+     * @var int
      */
-    protected $content = '';
+    protected $userId = '';
     
     /**
-     * Sets data in the instance
      * 
-     * @param array $data
+     * @var string
+     */
+    protected $updated;
+
+    /**
+     * 
+     * @var string
+     */
+    protected $content = '';        
+
+    /**
+     * 
+     * @param string $id
      * @return Comment
      */
-    public function setData(array $data) : Comment 
+    public function setUpdated(string $updated) : Comment
     {
-        $props = array_keys(get_class_vars(self::class));
-
-        foreach ($props as $prop) {
-            
-            $method = "set" . ucwords($prop);
-            $this->$method($data[$prop]);
-        }
-        
-        return $this;
+        $this->updated = $updated;
+        return $this;        
     }
     
     /**
-     * Converts this instance to an instance of a stdClass
      * 
-     * @return stdClass
+     * @return string
      */
-    public function toStdObject() : stdClass
+    public function getUpdated() : string
     {
-        $res = new stdClass();
-        $props = array_keys(get_class_vars(self::class));
-        
-        foreach ($props as $prop) {
-            
-            $method = "get" . ucwords($prop);
-            $res->$prop = $this->$method();
-        }
-        
-        return $res;        
-    }    
-
+        return $this->updated;
+    }
+    
+    /**
+     * 
+     * @param int $id
+     * @return Comment
+     */
+    public function setUserId(int $id) : Comment
+    {
+        $this->userId = $id;
+        return $this;        
+    }
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getUserId() : int
+    {
+        return $this->userId;
+    }
+    
+    /**
+     * 
+     * @param int $id
+     * @return Comment
+     */
+    public function setArticleId(int $id) : Comment
+    {
+        $this->articleId = $id;
+        return $this;        
+    }
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getArticleId() : int
+    {
+        return $this->articleId;
+    }
+    
     /**
      * 
      * @param string|null $id
