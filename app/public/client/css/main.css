@@ -1,3 +1,77 @@
 body {
+    background-color: #fafafa;
+    width: 95%;
+}
+
+#content {
+    max-width: 800px;
+    min-width: 320px;
+    margin: 10px auto;    
+}
+
+#app-comment {
+    margin-top: 10px;
+    padding: 5px 0px 5x 0px;
+    border-top: 1px solid #000;
+    width: 100%;    
+}
+
+#app-new-comment-form {
+    background-color: #c0c0c0;    
+}
+
+.form-row, .comment-box, .comment-action-panel {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;    
+}
+
+.box-left {
+    width: 100px;
+    padding: 5px
+}
+
+.box-right {
+    padding: 5px;
+    width: 100%;
+}
+
+.text-comment{
+    width: 95%;
+}
+
+.btn-send{
+    margin: 5px 0px 5px 5px;
+}
+
+#app-comment-list {
+    margin-top: 10px;
+}
+
+.comment-container {
+    margin: 10px 0 10px 0;
+    padding: 5px;
+    border: 1px solid #c0c0c0;
+    background-color: #fbfbef; 
+    border-radius: 10px;
+    box-shadow: 5px 5px darkgrey;
+}
+
+.comment-action-panel {
+    margin-top: 7px;
+    justify-content: space-between;        
+}
+
+.comment-item {
+    margin: 5px;
+}
+
+.error-message {    
     background-color: red;
+}
+
+.user-name {
+    color: green;
+    font-size: 12pt;
 }
