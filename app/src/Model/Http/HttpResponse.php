@@ -93,6 +93,9 @@ class HttpResponse
      */
     public function send() : void
     {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
         header("Content-Type: " . $this->contentType . "; charset=utf-8");
         http_response_code($this->code);
         die(json_encode($this->mixedObjectOrArray));

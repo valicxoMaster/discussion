@@ -169,7 +169,6 @@ class CommentController extends AbstractController
 
             self::checkInput($request, $inputData);
             
-            $inputData["updated"] = date("Y-m-d H:i:s");
             $commentModel->setData($inputData);         
             
             if (!$this->commentRepo->update($commentModel)) {

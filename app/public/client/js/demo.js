@@ -20,12 +20,10 @@ var getCommentHtml = function(item) {
     if (userEmail === item.email){
         
         html += "<div><input type='button' class='btn-action btn-edit' value='change'></div>";
-//        html += "<div style='width:10px'></div>";
         html += "<div><input type='button' class='btn-action btn-delete' value='delete'></div>";        
     }
     
-    html += "</div>";
-    
+    html += "</div>";    
     html += "</div>";
     
     html += "<div class='comment-item comment-text'>" + item.content;
@@ -59,7 +57,7 @@ var loadList = function(articleId) {
     });    
 };
 
-$("#user-email").blur(function() {
+$(document).on("blur", "#user-email", function() {
     loadList($("#content").data("article-id"));
 });
 
@@ -67,8 +65,8 @@ $(document).ready(function() {
     loadList($("#content").data("article-id"));
 });     
 
-$("#new-comment-send").click(function() {
-    
+$(document).on("click", "#new-comment-send", function() {
+
     var input = {
         email: $("#user-email").val(),
         userName: $("#user-name").val(),
