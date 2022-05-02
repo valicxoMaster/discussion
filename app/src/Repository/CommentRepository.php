@@ -54,6 +54,72 @@ class CommentRepository extends AbstractRepository
     
     /**
      * 
+     * @param Comment $comment
+     * @return int
+     */
+    public function update(Comment $comment) : bool
+    {
+        try {
+            
+            $sql = "UPDATE `comments` SET ";
+            $sql.= "updated = :updated, content = :content WHERE id = :id";
+            $sth = $this->pdo->prepare($sql);
+            $this->pdo->beginTransaction();
+
+            $sth->execute([
+                ":id" => $comment->getId(),
+                ":updated" => $comment->getUpdated(),
+                ":content" => $comment->getContent()            
+            ]);    
+            
+            $this->pdo->commit();
+            return true;
+        } catch (\PDOException $ex) {
+            
+            if ($this->pdo->inTransaction()) {
+                
+                $this->pdo->rollback();
+            }
+            
+            return false; 
+        }
+
+        return true;
+    }
+    
+    /**
+     * 
+     * @param Comment $comment
+     * @return int
+     */
+    public function delete(Comment $comment) : bool
+    {
+        try {
+            
+            $sql = "DELETE FROM `comments` WHERE id = :id";
+            $sth = $this->pdo->prepare($sql);
+            $this->pdo->beginTransaction();
+
+            $sth->execute([":id" => $comment->getId()]);    
+            
+            $this->pdo->commit();
+            return true;
+        } catch (\PDOException $ex) {
+            
+            if ($this->pdo->inTransaction()) {
+                
+                $this->pdo->rollback();
+            }
+            
+            return false; 
+        }
+
+        return true;
+    }
+    
+    
+    /**
+     * 
      * @param int $articleId
      * @return array
      */
